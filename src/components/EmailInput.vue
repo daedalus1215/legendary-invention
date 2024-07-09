@@ -4,17 +4,19 @@
         'is-invalid': !validateEmail(email),
     }" />
 </template>
-<script>
+
+<script setup>
+import { defineProps, defineEmits } from 'vue';
 import validateEmail from './validate-email';
 
-export default {
-    name: 'EmailInput',
-    props: ['email'],
-    methods: {
-        update($event) {
-            this.$emit('update:email', $event.target.value);
-        },
-        validateEmail
-    }
+const props = defineProps({
+    email: String
+});
+
+const emit = defineEmits(['update:email']);
+
+function update(event) {
+    emit('update:email', event.target.value);
 }
+
 </script>
